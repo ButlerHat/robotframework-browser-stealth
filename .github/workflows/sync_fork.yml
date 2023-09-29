@@ -1,0 +1,27 @@
+name: Sync Fork
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # This schedules the action to run every day at midnight
+  workflow_dispatch: # manual trigger
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: main # Replace with the name of the default branch of your fork
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          fetch-depth: 0
+      
+      - name: Fetch Upstream
+        run: |
+          git remote add upstream https://github.com/MarketSquare/robotframework-browser.git
+          git fetch upstream
+          git merge upstream/main
+      
+      - name: Push Changes
+        run: |
+          git push
