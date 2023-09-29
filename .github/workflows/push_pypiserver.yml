@@ -31,7 +31,7 @@ jobs:
         npm ci
         python -m pip install --upgrade pip
         pip install -r Browser/dev-requirements.txt
-        export VERSION=${git describe --tags --abbrev=0}
+        export VERSION=$(git describe --tags --abbrev=0)
         inv build
         inv release
     
