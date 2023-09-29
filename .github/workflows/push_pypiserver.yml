@@ -35,9 +35,9 @@ jobs:
         python bootstrap.py
         source .venv/bin/activate
         inv deps
+        export VERSION=$(git describe --tags --abbrev=0)
         inv version $VERSION
         inv build
-        export VERSION=$(git describe --tags --abbrev=0)
         inv release || true
     
     - name: Install Twine
