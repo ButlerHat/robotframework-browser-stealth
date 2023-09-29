@@ -13,8 +13,10 @@
 // limitations under the License.
 
 import * as playwright from 'playwright';
-import { Browser, BrowserContext, BrowserType, Locator, Page, chromium, firefox, webkit } from 'playwright';
+import { Browser, BrowserContext, BrowserType, Locator, Page, firefox, webkit } from 'playwright';
+import { chromium } from 'playwright-extra';
 import { v4 as uuidv4 } from 'uuid';
+import stealth from 'puppeteer-extra-plugin-stealth';
 
 import { Request, Response } from './generated/playwright_pb';
 import {
@@ -143,6 +145,8 @@ async function _newBrowser(
     if (browserType === 'firefox') {
         browser = await firefox.launch(launchOptions);
     } else if (browserType === 'chromium') {
+        const stealth_ = stealth();
+        chromium.use(stealth_);
         browser = await chromium.launch(launchOptions);
     } else if (browserType === 'webkit') {
         browser = await webkit.launch(launchOptions);
@@ -162,6 +166,8 @@ async function _connectBrowser(browserType: string, url: string): Promise<Browse
     if (browserType === 'firefox') {
         browser = await firefox.connect({ wsEndpoint: url });
     } else if (browserType === 'chromium') {
+        const stealth_ = stealth();
+        chromium.use(stealth_);
         browser = await chromium.connect({ wsEndpoint: url });
     } else if (browserType === 'webkit') {
         browser = await webkit.connect({ wsEndpoint: url });

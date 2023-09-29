@@ -41,6 +41,8 @@
     "google-protobuf": "3.21.2",
     "pino": "^8.15.1",
     "playwright": "^1.38.1",
+    "playwright-extra": "^4.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "strip-comments": "^2.0.1",
     "uuid": "^9.0.1"
   },
