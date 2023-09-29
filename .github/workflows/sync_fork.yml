@@ -24,4 +24,4 @@ jobs:
       
       - name: Push Changes
         run: |
-          git push
+          git push origin main
