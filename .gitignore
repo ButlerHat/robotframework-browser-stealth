@@ -55,3 +55,4 @@ results
 
 # linting
 .ruff_cache
+*.egg-info/
