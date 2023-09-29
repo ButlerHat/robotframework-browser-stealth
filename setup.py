@@ -37,7 +37,7 @@ else:
     latest_version = "18"
 
 setup_kwargs = {
-    "name": "robotframework-browser-stelth",
+    "name": "robotframework-browser-stealth",
     "version": latest_version,
     "description": "Robot Framework Browser library powered by Playwright. Aiming for speed, reliability and visibility.",
     "long_description": long_description,
@@ -46,7 +46,7 @@ setup_kwargs = {
     "author_email": "mikko.korpela@gmail.com",
     "maintainer": None,
     "maintainer_email": None,
-    "url": "https://github.com/ButlerHat/robotframework-browser-stelth/archive/",
+    "url": "https://github.com/ButlerHat/robotframework-browser-stealth/archive/",
     "packages": packages,
     "package_data": package_data,
     "install_requires": install_requires,
