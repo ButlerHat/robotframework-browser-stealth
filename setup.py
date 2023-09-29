@@ -23,7 +23,7 @@ package_data = {
 install_requires = open(os.path.join("Browser", "requirements.txt")).readlines()
 
 setup_kwargs = {
-    "name": "robotframework-browser",
+    "name": "robotframework-browser-stelth",
     "version": "18",
     "description": "Robot Framework Browser library powered by Playwright. Aiming for speed, reliability and visibility.",
     "long_description": long_description,
@@ -32,7 +32,7 @@ setup_kwargs = {
     "author_email": "mikko.korpela@gmail.com",
     "maintainer": None,
     "maintainer_email": None,
-    "url": "https://github.com/MarketSquare/robotframework-browser",
+    "url": "https://github.com/ButlerHat/robotframework-browser-stelth/archive/",
     "packages": packages,
     "package_data": package_data,
     "install_requires": install_requires,
