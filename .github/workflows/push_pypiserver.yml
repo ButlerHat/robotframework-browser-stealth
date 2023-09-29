@@ -33,7 +33,7 @@ jobs:
         pip install -r Browser/dev-requirements.txt
         export VERSION=$(git describe --tags --abbrev=0)
         inv build
-        inv release
+        python setup.py sdist
     
     - name: Install Twine
       run: |

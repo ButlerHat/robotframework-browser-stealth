@@ -2,6 +2,7 @@
 import os
 from setuptools import setup, find_packages  # type: ignore
 import sys
+import requests
 
 sys.path.append("Browser")
 
@@ -22,9 +23,22 @@ package_data = {
 
 install_requires = open(os.path.join("Browser", "requirements.txt")).readlines()
 
+# Get last version of robotframework-browser from pypi
+package_name = "robotframework-browser"
+url = f"https://pypi.org/pypi/{package_name}/json"
+response = requests.get(url)
+
+if response.status_code == 200:
+    package_info = response.json()
+    latest_version = package_info["info"]["version"]
+    print(f"Latest version of {package_name} is {latest_version}")
+else:
+    print(f"Error getting {package_name} version from pypi")
+    latest_version = "18"
+
 setup_kwargs = {
     "name": "robotframework-browser-stelth",
-    "version": "18",
+    "version": latest_version,
     "description": "Robot Framework Browser library powered by Playwright. Aiming for speed, reliability and visibility.",
     "long_description": long_description,
     "long_description_content_type": "text/markdown",
