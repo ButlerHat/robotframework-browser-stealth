@@ -1,8 +1,9 @@
 name: Release tasks
 
 on:
-  release:
-    types: [ published ]
+  # release:
+  #   types: [ published ]
+  workflow_dispatch:
 
 jobs:
   gh-pages:
