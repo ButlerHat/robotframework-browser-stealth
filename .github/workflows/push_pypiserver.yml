@@ -21,10 +21,10 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 16.x
-    - name: Set up Python 3.10
+    - name: Set up Python 3.9
       uses: actions/setup-python@v4
       with:
-        python-version: 3.10
+        python-version: 3.9
     - name: Fetch Upstream Tag version
       run: |
         git remote add upstream https://github.com/MarketSquare/robotframework-browser.git
