@@ -21,16 +21,14 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 16.x
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.9
+    # Python 3.9 is already installed
     - name: Fetch Upstream Tag version
       run: |
         git remote add upstream https://github.com/MarketSquare/robotframework-browser.git
         git fetch upstream --tags
-    - name: Dependencies for building docs # TODO: thin a bit
+    - name: Dependencies for building docs # TODO: thin a bit. 
       run: |
+        alias python=python3  
         npm ci
         python bootstrap.py
         source .venv/bin/activate
