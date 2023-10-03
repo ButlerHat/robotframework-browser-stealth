@@ -26,7 +26,7 @@ jobs:
       run: |
         git remote add upstream https://github.com/MarketSquare/robotframework-browser.git
         git fetch upstream --tags
-    - name: Dependencies for building docs # TODO: thin a bit. 
+    - name: Dependencies for building docs # TODO: thin a bit. Run in bash because of alias
       run: |
         alias python=python3  
         npm ci
@@ -37,7 +37,7 @@ jobs:
         inv version $VERSION
         inv build
         inv release || true
-    
+      shell: bash
     - name: Install Twine
       run: |
         python -m pip install twine
