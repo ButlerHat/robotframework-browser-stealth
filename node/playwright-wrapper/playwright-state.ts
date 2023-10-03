@@ -619,6 +619,8 @@ export async function newPersistentContext(
     let browser: BrowserType;
     switch (options.defaultBrowserType || options.browser) {
         case 'chromium':
+            const stealth_ = stealth();
+            chromium.use(stealth_);
             browser = chromium;
             break;
         case 'firefox':
