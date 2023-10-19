@@ -30,7 +30,7 @@ jobs:
       run: |
         alias python=python3  
         npm ci
-        python bootstrap.py
+        python3 bootstrap.py
         source .venv/bin/activate
         inv deps
         export VERSION=$(git describe --tags --abbrev=0)
