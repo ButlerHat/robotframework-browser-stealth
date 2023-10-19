@@ -47,5 +47,5 @@ jobs:
         TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
       run: |
-        twine upload --repository-url ${{ secrets.PYPISERVER }} dist/*.whl
+        python3 -m twine upload --repository-url ${{ secrets.PYPISERVER }} dist/*.whl
 
