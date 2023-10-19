@@ -24,7 +24,7 @@ jobs:
     # Python 3.9 is already installed
     - name: Fetch Upstream Tag version
       run: |
-        git remote add upstream https://github.com/MarketSquare/robotframework-browser.git
+        git remote add upstream https://github.com/MarketSquare/robotframework-browser.git || true
         git fetch upstream --tags
     - name: Dependencies for building docs # TODO: thin a bit. Run in bash because of alias
       run: |

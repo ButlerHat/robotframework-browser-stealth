@@ -20,7 +20,7 @@ jobs:
         run: |
           git config --global user.name "${{ secrets.GIT_NAME }}"
           git config --global user.email "${{ secrets.GIT_EMAIL }}"
-          git remote add upstream https://github.com/MarketSquare/robotframework-browser.git
+          git remote add upstream https://github.com/MarketSquare/robotframework-browser.git || true
           git fetch upstream
           git merge upstream/main
       
