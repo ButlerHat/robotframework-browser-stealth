@@ -339,6 +339,28 @@ class PlaywrightState(LibraryComponent):
             return response.body
 
     @keyword(tags=("Setter", "BrowserControl"))
+    def connect_to_browser_over_cdp(
+        self, endpointURL: str
+    ):
+        """Connect to a lauched chrome Browser. To connect it, must be launched with ``google-chrome --remote-debugging-port=1243``.
+        Then connect to it with ``Connect To Browser Over CDP  http://localhost:1243``.
+
+        See `Browser, Context and Page` for more information about Browser and related concepts.
+
+        Returns a stable identifier for the connected browser.
+
+        | =Argument=     | =Description= |
+        | ``endpointURL`` | Address to connect to. |
+
+        """
+        with self.playwright.grpc_channel() as stub:
+            response = stub.ConnectToBrowserOverCDP(
+                Request().ConnectBrowserOverCDP(url=endpointURL)
+            )
+            logger.info(response.log)
+            return response.body
+
+    @keyword(tags=("Setter", "BrowserControl"))
     def new_browser(
         self,
         browser: SupportedBrowsers = SupportedBrowsers.chromium,

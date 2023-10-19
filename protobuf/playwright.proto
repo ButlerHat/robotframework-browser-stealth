@@ -116,6 +116,10 @@ message Request {
     string url= 2;
   }
 
+  message ConnectBrowserOverCDP {
+    string url= 1;
+  }
+
   message TextInput {
     string input = 1;
     string selector = 2;
@@ -467,6 +471,7 @@ service  Playwright {
   rpc NewBrowser(Request.Browser) returns (Response.String);
   rpc NewPersistentContext(Request.PersistentContext) returns (Response.NewPersistentContextResponse);
   rpc ConnectToBrowser(Request.ConnectBrowser) returns (Response.String);
+  rpc ConnectToBrowserOverCDP(Request.ConnectBrowserOverCDP) returns (Response.String);
   rpc CloseBrowser(Request.Empty) returns (Response.String);
   rpc CloseAllBrowsers(Request.Empty) returns (Response.Empty);
   rpc CloseContext(Request.Empty) returns (Response.Empty);

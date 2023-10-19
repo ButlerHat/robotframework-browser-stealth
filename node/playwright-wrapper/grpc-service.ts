@@ -245,6 +245,7 @@ export class PlaywrightServer implements IPlaywrightServer {
     newBrowser = this.wrapping(playwrightState.newBrowser);
     newPersistentContext = this.wrapping(playwrightState.newPersistentContext);
     connectToBrowser = this.wrapping(playwrightState.connectToBrowser);
+    connectToBrowserOverCDP = this.wrapping(playwrightState.connectToBrowserOverCDP);
     goTo = this.wrappingPage(browserControl.goTo);
 
     async goBack(

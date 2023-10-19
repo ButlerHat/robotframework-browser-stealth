@@ -181,6 +181,37 @@ async function _connectBrowser(browserType: string, url: string): Promise<Browse
     };
 }
 
+interface BrowserContextPage {
+    browserAndConfigs: BrowserAndConfs;
+    context: IndexedContext;
+    page: IndexedPage;
+}
+
+async function _connectBrowserOverCDP(url: string): Promise<BrowserContextPage> {
+    const stealth_ = stealth();
+    chromium.use(stealth_);
+    const browser = await chromium.connectOverCDP({ endpointURL: url });
+    const defaultContext = browser.contexts()[0];
+    // Temporal, create context with empty options
+    const context = {
+        id: `context=${uuidv4()}`,
+        c: defaultContext,
+        pageStack: [] as IndexedPage[],
+        traceFile: '',
+    };
+    const defaultPage = defaultContext.pages()[0];
+    const pageContext = indexedPage(defaultPage);
+    return {
+        browserAndConfigs: {
+            browser,
+            browserType: 'chromium',
+            headless: false,
+        },
+        context,
+        page: pageContext,
+    };
+}
+
 async function _newBrowserContext(
     browser: Browser,
     defaultTimeout: number,
@@ -695,6 +726,23 @@ export async function connectToBrowser(
     const url = request.getUrl();
     const browserAndConfs = await _connectBrowser(browserType, url);
     const browserState = openBrowsers.addBrowser(browserAndConfs);
+    return stringResponse(browserState.id, 'Successfully connected to browser');
+}
+
+export async function connectToBrowserOverCDP(
+    request: Request.ConnectBrowser,
+    openBrowsers: PlaywrightState,
+): Promise<Response.String> {
+    const url = request.getUrl();
+    const browserContextPage = await _connectBrowserOverCDP(url);
+    const browserState = openBrowsers.addBrowser(browserContextPage.browserAndConfigs);
+    const iBrowserState = { browser: browserState, newBrowser: true };
+    browserContextPage.context.pageStack.unshift(browserContextPage.page);
+    // Assert browser is not null
+    if (browserState.browser === null) {
+        throw new Error('Cannot connect to browser');
+    }
+    iBrowserState.browser.pushContext(browserContextPage.context);
     return stringResponse(browserState.id, 'Successfully connected to browser');
 }
 
