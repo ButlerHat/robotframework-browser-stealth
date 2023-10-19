@@ -40,7 +40,7 @@ jobs:
       shell: bash
     - name: Install Twine
       run: |
-        python -m pip install twine
+        python3 -m pip install twine
         
     - name: Upload Package to PyPI Server
       env:
